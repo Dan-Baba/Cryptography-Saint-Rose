@@ -6,7 +6,7 @@ public class AffineCipher {
 
     public AffineCipher(int alpha, int beta) {
         if (GCD.calcGCD(alpha, 26) != 1) {
-            throw new RuntimeException("GCD of alpha and 26 needs to be 1.");
+            throw new InvalidAlphaException();
         }
         this.alpha = alpha;
         this.beta = beta;
