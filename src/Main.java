@@ -1,3 +1,5 @@
+import javafx.application.Application;
+
 import java.util.Scanner;
 
 public class Main {
@@ -18,7 +20,11 @@ public class Main {
             case "2":
                 usingAffineCipher();
                 break;
+            case "q":
+                System.out.println("Exiting...");
+                break;
             default:
+                System.out.println("Don't know what you mean, try re-launching...");
                 break;
         }
 
