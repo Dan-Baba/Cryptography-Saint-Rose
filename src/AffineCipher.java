@@ -5,7 +5,7 @@ public class AffineCipher {
     private int beta;
 
     public AffineCipher(int alpha, int beta) {
-        if (GCD.calcGCD(alpha, 26) != 1) {
+        if (Utilities.calcGCD(alpha, 26) != 1) {
             throw new InvalidAlphaException();
         }
         this.alpha = alpha;

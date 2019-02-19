@@ -5,7 +5,7 @@ public class Main {
     private static Scanner s = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+        System.out.println(Utilities.modularExponentiation(1024, 102, 156));
         System.out.println("Which cipher would you like to use?");
         System.out.println("1. Shift Cipher");
         System.out.println("2. Affine Cipher");
