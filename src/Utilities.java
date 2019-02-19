@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 public class Utilities {
 
     public static int calcGCD(int a, int b) {
@@ -43,6 +45,31 @@ public class Utilities {
         }
 
         return r[w-1];
+    }
+
+    public static int modularInverse(int a, int b) {
+        return BigInteger.valueOf(a).modInverse(BigInteger.valueOf(b)).intValue();
+    }
+
+    // Example input
+    // 3 mod 7 (a mod m)
+    // 5 mod 15 (b mod n)
+    public static int chineseRemainderTheorem(int a, int m, int b, int n) {
+        // Check GCD(m, n) = 1
+        if (calcGCD(m, n) != 1) {
+            return -1;
+        }
+        int newMod = m * n;
+        // Solve for k: b + nk = a mod m
+        int k = (a - b) * modularInverse(n, m);
+        // Solve for x: x = b + nk mod (m * n)
+        int x = (b + n * k) % newMod;
+
+        if (x < 0) {
+            x = x + newMod;
+        }
+
+        return x;
     }
 
 
