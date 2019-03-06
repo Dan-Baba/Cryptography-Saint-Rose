@@ -9,10 +9,9 @@ public class Utilities {
             b = temp;
         }
 
-        int q, r;
+        int r;
 
         while(true) {
-            q = a / b;
             r = a % b;
 
             if (r == 0) {
@@ -24,27 +23,27 @@ public class Utilities {
         }
     }
 
+    // Input is: (y^x mod n)
     public static int modularExponentiation(int x, int y, int n) {
         String binaryString = Integer.toBinaryString(x);
         int w = binaryString.length();
-        int[] r = new int[w];
-        int[] s = new int[w+1];
-        s[0] = 1;
+        long r = 0;
+        long s = 1;
 
         for (int k = 0; k < w; k++) {
 
             // Step 2
             if (binaryString.charAt(k) == '1') {
-                r[k] = s[k] * y % n;
+                r = Math.floorMod(s * y, n);
             } else {
-                r[k] = s[k];
+                r = s;
             }
 
             // Step 3
-            s[k+1] = r[k] * r[k] % n;
+            s = Math.floorMod(r * r, n);
         }
 
-        return r[w-1];
+        return (int)r;
     }
 
     public static int modularInverse(int a, int b) {
@@ -70,6 +69,49 @@ public class Utilities {
         }
 
         return x;
+    }
+
+    // TODO: How can I dry this out?
+    public static String joinMessage(int[] message, String separator) {
+        String joinedMessage = "";
+        if (message.length == 0)
+            return joinedMessage;
+
+        joinedMessage += message[0];
+        for (int i = 1; i < message.length; i++) {
+            joinedMessage += separator;
+            joinedMessage += message[i];
+        }
+
+        return joinedMessage;
+    }
+
+    public static String joinMessage(String[] message, String separator) {
+        String joinedMessage = "";
+        if (message.length == 0)
+            return joinedMessage;
+
+        joinedMessage += message[0];
+        for (int i = 1; i < message.length; i++) {
+            joinedMessage += separator;
+            joinedMessage += message[i];
+        }
+
+        return joinedMessage;
+    }
+
+    public static String joinMessage(char[] message, String separator) {
+        String joinedMessage = "";
+        if (message.length == 0)
+            return joinedMessage;
+
+        joinedMessage += message[0];
+        for (int i = 1; i < message.length; i++) {
+            joinedMessage += separator;
+            joinedMessage += message[i];
+        }
+
+        return joinedMessage;
     }
 
 

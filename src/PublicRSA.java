@@ -8,16 +8,15 @@ public class PublicRSA {
 
     public String encrypt(String plainText) {
         char[] message = plainText.toCharArray();
-
+        int[] encryptedMessage = new int[message.length];
         for (int i = 0; i < message.length; i++) {
-            message[i] = (char)encode(message[i]);
+            encryptedMessage[i] = encode((int)message[i]);
         }
 
-        return new String(message);
+        return Utilities.joinMessage(encryptedMessage, " ");
     }
 
-    public int encode(Character character) {
-        int charVal = (int) character;
-        return Utilities.modularExponentiation(charVal, this.e, this.n);
+    public int encode(int character) {
+        return Utilities.modularExponentiation(this.e, character, this.n);
     }
 }
