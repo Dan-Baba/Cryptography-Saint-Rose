@@ -5,10 +5,11 @@ public class Main {
     private static Scanner s = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println(Utilities.chineseRemainderTheorem(7, 12345, 3, 11111));
+        System.out.println(Utilities.chineseRemainderTheorem(1394, 8675309, 17623, 6648639));
         System.out.println("Which cipher would you like to use?");
         System.out.println("1. Shift Cipher");
         System.out.println("2. Affine Cipher");
+        System.out.println("3. RSA");
         System.out.println("'q' to exit.");
 
         switch (s.nextLine()) {
@@ -17,6 +18,9 @@ public class Main {
                 break;
             case "2":
                 usingAffineCipher();
+                break;
+            case "3":
+                usingRSA();
                 break;
             case "q":
                 System.out.println("Exiting...");
@@ -81,6 +85,41 @@ public class Main {
                 System.out.println("What text would you like to decrypt?");
                 String cipherText = s.nextLine();
                 System.out.println(affineCipher.decrypt(cipherText));
+            } else if (input.equals("-1")) {
+                break;
+            } else {
+                System.out.println("Sorry, I don't know what you're trying to do.");
+            }
+        }
+    }
+
+    private static void usingRSA() {
+        PublicRSA publicRSA;
+        PrivateRSA privateRSA;
+
+        System.out.println("Using RSA.");
+        System.out.println("What would you like to use as p? (MUST BE PRIME)");
+        int p = s.nextInt();
+        s.nextLine();
+        System.out.println("What would you like to use as q? (MUST BE PRIME)");
+        int q = s.nextInt();
+        s.nextLine();
+        privateRSA = new PrivateRSA(p, q);
+        publicRSA = privateRSA.getPublicKey();
+
+        while(true) {
+            System.out.println("Input 'e' to encrypt or 'd' to decrypt. '-1' to quit.");
+            String input = s.nextLine();
+
+            if (input.toLowerCase().equals("e")) {
+                System.out.println("What text would you like to encrypt?");
+                String plainText = s.nextLine();
+                String encryptedText = publicRSA.encrypt(plainText);
+                System.out.println(encryptedText);
+            } else if (input.toLowerCase().equals("d")) {
+                System.out.println("What text would you like to decrypt?");
+                String cipherText = s.nextLine();
+                System.out.println(privateRSA.decrypt(cipherText));
             } else if (input.equals("-1")) {
                 break;
             } else {
