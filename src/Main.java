@@ -5,13 +5,13 @@ public class Main {
     private static Scanner s = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println(Utilities.chineseRemainderTheorem(1394, 8675309, 17623, 6648639));
         System.out.println("Which tool would you like to use?");
         System.out.println("1. Shift Cipher");
         System.out.println("2. Affine Cipher");
         System.out.println("3. RSA");
         System.out.println("4. Modular Exponentiation");
         System.out.println("5. Chinese Remainder");
+        System.out.println("6. Euler's Phi Function");
         System.out.println("'q' to exit.");
 
         switch (s.nextLine()) {
@@ -29,6 +29,9 @@ public class Main {
                 break;
             case "5":
                 usingChinesesRemainder();
+                break;
+            case "6":
+                usingPhiFunction();
                 break;
             case "q":
                 System.out.println("Exiting...");
@@ -170,6 +173,17 @@ public class Main {
             n = s.nextInt();
             System.out.println(String.format("(%d mod %d) and (%d mod %d) = (%d mod %d)",
                     a, m, b, n, Utilities.chineseRemainderTheorem(a, m, b, n), (m*n)));
+        }
+    }
+
+    private static void usingPhiFunction() {
+        int n;
+        while(true) {
+            System.out.println("Please input n (or -1 to exit).");
+            n = s.nextInt();
+            if (n < 0)
+                break;
+            System.out.println(Utilities.phiFunction(n));
         }
     }
 }

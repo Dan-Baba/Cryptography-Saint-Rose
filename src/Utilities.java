@@ -71,6 +71,17 @@ public class Utilities {
         return x;
     }
 
+    // Euler's phi function
+    public static int phiFunction(int n) {
+        int num = 0;
+        for (int i = 1; i <= n; i++) {
+            if (calcGCD(n, i) == 1) {
+                num++;
+            }
+        }
+        return num;
+    }
+
     // TODO: How can I dry this out?
     public static String joinMessage(int[] message, String separator) {
         String joinedMessage = "";
