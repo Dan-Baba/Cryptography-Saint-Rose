@@ -10,7 +10,7 @@ Shift letters with multiplicative offset. Alpha is multiplicative offset, and be
 #### RSA
 Traditional RSA implementation. You provide p and q, it handles the rest for encrypting text. (p-1)*(q-1) MUST be greater than the greatest possible character value which is stored in the constant BLOCK_MAX_VAL(Java this is 65535). To use you just need to new up a private key, then use the private key to get the public key. Now you can encrypt with the public key, and decrypt with the private key.
 
-### Utilities
+### main.Utilities
 #### calcGCD
 Uses Euclidean's to calculate the greatest common denominator for the two passed in values.
 

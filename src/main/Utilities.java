@@ -1,4 +1,7 @@
+package main;
+
 import java.math.BigInteger;
+import java.util.Random;
 
 public class Utilities {
 
@@ -80,6 +83,57 @@ public class Utilities {
             }
         }
         return num;
+    }
+
+    //Miller-Rabin primality test
+    public static boolean millerRabinPrimality(int n) {
+        if (n == 1)
+            return false;
+        if (n == 2 || n == 3)
+            return true;
+        if (n % 2 == 0)
+            return false;
+        // find k and m.
+        int k = 1;
+        int m = (n-1)/2;
+        while ((n-1) != (Math.pow(2, k) * m)) {
+            k++;
+            m = (int)((n-1) / Math.pow(2, k));
+        }
+
+        //find a where 1 < a < n-1
+        Random random = new Random();
+        int a = random.nextInt(n-3) + 2;
+
+        // find b_0
+        int b = modularExponentiation(m, a, n);
+        if (b == 1 || b == n-1) {
+            return true;
+        }
+
+        // Otherwise b_1 = b_0^2 mod n
+        b = modularExponentiation(2, b, n);
+        if (b == 1)
+            return false;
+        else if (b == n-1)
+            return true;
+
+        // Do iterations b_2 -> b_k-2
+        for (int i = 2; i <= k-2; i++) {
+            b = modularExponentiation(2, b, n);
+            if (b == 1)
+                return false;
+            else if (b == n-1)
+                return true;
+        }
+
+        // if b_k-1 = -1 mod n then is composite, else it's prime? Have to ask.
+        // ASK ABOUT THIS STATEMENT, I'M CHANGING TO RETURN FALSE ALL THE TIME DOWN HERE.
+        b = modularExponentiation(2, b, n);
+        if (b == n-1)
+            return false;
+        else
+            return false;
     }
 
     // TODO: How can I dry this out?
