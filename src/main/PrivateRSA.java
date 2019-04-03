@@ -1,6 +1,8 @@
 import java.nio.ByteBuffer;
 import java.util.Base64;
 
+package main;
+
 public class PrivateRSA {
     public static int BLOCK_MAX_VAL = 65535;
     int p, q, d;
