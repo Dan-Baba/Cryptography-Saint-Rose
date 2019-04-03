@@ -1,3 +1,4 @@
+import java.util.Base64;
 import java.util.Scanner;
 
 public class Main {
@@ -5,7 +6,7 @@ public class Main {
     private static Scanner s = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println(Utilities.chineseRemainderTheorem(1394, 8675309, 17623, 6648639));
+        System.out.println();
         System.out.println("Which tool would you like to use?");
         System.out.println("1. Shift Cipher");
         System.out.println("2. Affine Cipher");

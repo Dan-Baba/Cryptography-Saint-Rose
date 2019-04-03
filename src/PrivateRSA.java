@@ -1,3 +1,6 @@
+import java.nio.ByteBuffer;
+import java.util.Base64;
+
 public class PrivateRSA {
     public static int BLOCK_MAX_VAL = 65535;
     int p, q, d;
@@ -27,20 +30,13 @@ public class PrivateRSA {
     }
 
     public String decrypt(String cipherText) {
-        String[] cipherBlocks = cipherText.split(" ");
-        char[] plainText = new char[cipherBlocks.length];
-        int cipherBlock;
-        for (int i = 0; i < cipherBlocks.length; i++) {
-            try {
-                cipherBlock = Integer.parseInt(cipherBlocks[i]);
-            } catch (Exception e) {
-                System.out.println("What you gave me to decrypt isn't right. I guess I'll die.");
-                throw new RuntimeException("Dead");
-            }
-            plainText[i] = decode(cipherBlock);
+        ByteBuffer buffer = ByteBuffer.wrap(Base64.getDecoder().decode(cipherText));
+        StringBuilder plainText = new StringBuilder();
+        while (buffer.hasRemaining()) {
+            plainText.append(decode(buffer.getInt()));
         }
 
-        return Utilities.joinMessage(plainText, "");
+        return plainText.toString();
     }
 
     public char decode(int character) {

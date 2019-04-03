@@ -1,3 +1,6 @@
+import java.nio.ByteBuffer;
+import java.util.Base64;
+
 public class PublicRSA {
     int n, e;
 
@@ -8,12 +11,13 @@ public class PublicRSA {
 
     public String encrypt(String plainText) {
         char[] message = plainText.toCharArray();
-        int[] encryptedMessage = new int[message.length];
+        ByteBuffer buffer = ByteBuffer.allocate(message.length * Integer.BYTES);
+
         for (int i = 0; i < message.length; i++) {
-            encryptedMessage[i] = encode((int)message[i]);
+            buffer.putInt((i * 4), encode((int)message[i]));
         }
 
-        return Utilities.joinMessage(encryptedMessage, " ");
+        return Base64.getEncoder().encodeToString(buffer.array());
     }
 
     public int encode(int character) {
