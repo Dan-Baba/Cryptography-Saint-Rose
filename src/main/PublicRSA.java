@@ -16,9 +16,8 @@ public class PublicRSA {
         ByteBuffer buffer = ByteBuffer.allocate(message.length * Integer.BYTES);
 
         for (int i = 0; i < message.length; i++) {
-            buffer.putInt((i * 4), encode((int)message[i]));
+            buffer.putInt(encode((int)message[i]));
         }
-
         return Base64.getEncoder().encodeToString(buffer.array());
     }
 
